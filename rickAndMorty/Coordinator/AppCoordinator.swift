@@ -36,7 +36,10 @@ final class AppCoordinator: AppCoordinatorProtocol {
     }
     
     func showMainFlow() {
-        
+        let tabBarCoordinator = TabBarCoordinator(navigationController,dependencies: dependencies)
+        tabBarCoordinator.finishDelegate = self
+        tabBarCoordinator.start()
+        childCoordinators.append(tabBarCoordinator)
     }
     
     func showCharacterFlow() {
@@ -50,7 +53,7 @@ extension AppCoordinator: CoordinatorFinishDelegate {
         childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type })
         switch childCoordinator.type {
         case.launch:
-            showLaunchFlow()
+            showMainFlow()
         case .character:
             showCharacterFlow()
         case .app, .tabBar: break
