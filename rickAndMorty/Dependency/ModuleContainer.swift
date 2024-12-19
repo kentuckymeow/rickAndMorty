@@ -17,10 +17,8 @@ protocol IModuleContainer {
 
 final class ModuleContainer: IModuleContainer {
     private let dependencies: IDependencies
-    private let navigationController: UINavigationController
-    required init(_ navigationController: UINavigationController, dependencies: IDependencies) {
+    required init(dependencies: IDependencies) {
         self.dependencies = dependencies
-        self.navigationController = navigationController
     }
 }
 
@@ -44,10 +42,8 @@ extension ModuleContainer {
 extension ModuleContainer {
     func getEpisodesView() -> UIViewController {
         let view = EpisodesViewController()
-        
-        let appCoordinator = AppCoordinator(navigationController, dependencies: dependencies) // Пример, если у вас нет синглтона для AppCoordinator
+        let appCoordinator = AppCoordinator(dependencies: dependencies)
         let router = EpisodesRouter(appCoordator: appCoordinator)
-        
         let viewModel = EpisodesViewModel(router: router)
         view.viewModel = viewModel
         return view

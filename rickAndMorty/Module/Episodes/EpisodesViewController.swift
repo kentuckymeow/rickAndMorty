@@ -11,7 +11,6 @@ final class EpisodesViewController: UIViewController {
     var viewModel: EpisodesViewModel?
     private var collectionView: UICollectionView!
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

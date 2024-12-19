@@ -38,8 +38,6 @@ final class LaunchViewController: UIViewController {
         return imageView
     }()
     
-    
-    
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(imageLogoView)
@@ -71,9 +69,6 @@ final class LaunchViewController: UIViewController {
         imageLoadingView.layer.add(rotation, forKey: "transform.rotation")
     }
     
-    
-   
-    
     private func showLaunchToMainFlowAnimation() {
         animator.addAnimations {
             self.imageLoadingView.transform = .init(scaleX: 2, y: 2)
@@ -90,6 +85,4 @@ final class LaunchViewController: UIViewController {
         }
         animator.startAnimation(afterDelay: 3.0)
     }
-    
-   
 }
