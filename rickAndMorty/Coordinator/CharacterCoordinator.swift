@@ -1,21 +1,21 @@
 //
-//  TabBarCoordinator.swift
+//  CharacterCoordinator.swift
 //  rickAndMorty
 //
-//  Created by Arseni Khatsuk on 17.12.2024.
+//  Created by Arseni Khatsuk on 19.12.2024.
 //
 
 import UIKit
 
-protocol TabBarCoordinatorProtocol: Coordinator {
+protocol CharacterCoordinatorProtocol: Coordinator {
     func start()
 }
 
-final class TabBarCoordinator: TabBarCoordinatorProtocol {
+final class CharacterCoordinator: CharacterCoordinatorProtocol {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType { .tabBar }
+    var type: CoordinatorType { .character }
     var dependencies: IDependencies
     
     required init(_ navigationController: UINavigationController, dependencies: IDependencies) {
@@ -24,13 +24,13 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
     }
     
     func start() {
-        showTabBarViewController()
+        showCharacterViewController()
     }
     
-    func showTabBarViewController() {
-        let tabBarViewController = TabBarAssembly.configure(dependencies)
-        let navVC = UINavigationController(rootViewController: tabBarViewController)
-        if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
+    func showCharacterViewController() {
+        let characterViewController = CharacterAssembly.configure(dependencies)
+        let navVC = UINavigationController(rootViewController: characterViewController)
+        if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow}).first {
             window.rootViewController = navVC
             UIView.transition(with: window, duration: 1.0, options: [.transitionCrossDissolve], animations: nil, completion: nil)
         } else {

@@ -12,12 +12,15 @@ protocol IModuleContainer {
     func getTabBarView() -> UIViewController
     func getEpisodesView() -> UIViewController
     func getFavouritesView() -> UIViewController
+    func getCharacterView() -> UIViewController
 }
 
 final class ModuleContainer: IModuleContainer {
     private let dependencies: IDependencies
-    required init(_ dependencies: IDependencies) {
+    private let navigationController: UINavigationController
+    required init(_ navigationController: UINavigationController, dependencies: IDependencies) {
         self.dependencies = dependencies
+        self.navigationController = navigationController
     }
 }
 
@@ -40,13 +43,26 @@ extension ModuleContainer {
 
 extension ModuleContainer {
     func getEpisodesView() -> UIViewController {
-        return EpisodesViewController()
+        let view = EpisodesViewController()
+        
+        let appCoordinator = AppCoordinator(navigationController, dependencies: dependencies) // Пример, если у вас нет синглтона для AppCoordinator
+        let router = EpisodesRouter(appCoordator: appCoordinator)
+        
+        let viewModel = EpisodesViewModel(router: router)
+        view.viewModel = viewModel
+        return view
     }
 }
 
 extension ModuleContainer {
     func getFavouritesView() -> UIViewController {
         return FavouritesViewController()
+    }
+}
+
+extension ModuleContainer {
+    func getCharacterView() -> UIViewController {
+        return CharacterViewController()
     }
 }
 

@@ -43,10 +43,12 @@ final class AppCoordinator: AppCoordinatorProtocol {
     }
     
     func showCharacterFlow() {
-        
+        let characterCoordinator = CharacterCoordinator(navigationController, dependencies: dependencies)
+        characterCoordinator.finishDelegate = self
+        characterCoordinator.start()
+        childCoordinators.append(characterCoordinator)
     }
 }
-
 
 extension AppCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
@@ -54,9 +56,7 @@ extension AppCoordinator: CoordinatorFinishDelegate {
         switch childCoordinator.type {
         case.launch:
             showMainFlow()
-        case .character:
-            showCharacterFlow()
-        case .app, .tabBar: break
+        case .app, .tabBar, .character: break
         }
     }
 }

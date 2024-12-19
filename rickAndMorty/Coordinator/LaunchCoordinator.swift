@@ -37,8 +37,6 @@ final class LaunchCoordinator: LaunchCoordinatorProtocol {
                 }
             }
         }
-        
         navigationController.show(launchViewController, sender: self)
-        
     }
 }
