@@ -48,7 +48,7 @@ final class LaunchViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             imageLogoView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            imageLogoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,constant: 50),
+            imageLogoView.topAnchor.constraint(equalTo: view.topAnchor,constant: 50),
             imageLogoView.widthAnchor.constraint(equalToConstant: 312),
             imageLogoView.heightAnchor.constraint(equalToConstant: 104),
         ])

@@ -27,13 +27,19 @@ final class TabBarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
-       setupInitialViewController()
+        setupInitialViewController()
     }
     
     private func setupTabBar() {
         tabBarView = UITabBar()
         tabBarView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tabBarView)
+        
+        tabBarView.layer.shadowColor = UIColor.black.cgColor
+        tabBarView.layer.shadowOpacity = 0.1
+        tabBarView.layer.shadowOffset = CGSize(width: 0, height: -2)
+        tabBarView.layer.shadowRadius = 4
+        tabBarView.layer.masksToBounds = false
         
         NSLayoutConstraint.activate([
             tabBarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -48,7 +54,8 @@ final class TabBarViewController: UIViewController {
         let secondTabItem = UITabBarItem(title: nil, image: UIImage(named: ImageName.favouritesIcon), tag: 1)
         
         tabBarView.items = [firstTabItem, secondTabItem]
-        tabBarView.selectedItem = firstTabItem 
+        tabBarView.selectedItem = firstTabItem
+        tabBarView.itemPositioning = .centered
     }
     
     private func setupInitialViewController() {

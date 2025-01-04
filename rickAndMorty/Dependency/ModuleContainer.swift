@@ -17,7 +17,7 @@ protocol IModuleContainer {
 
 final class ModuleContainer: IModuleContainer {
     private let dependencies: IDependencies
-    required init(dependencies: IDependencies) {
+    required init(_ dependencies: IDependencies) {
         self.dependencies = dependencies
     }
 }
@@ -42,9 +42,7 @@ extension ModuleContainer {
 extension ModuleContainer {
     func getEpisodesView() -> UIViewController {
         let view = EpisodesViewController()
-        let appCoordinator = AppCoordinator(dependencies: dependencies)
-        let router = EpisodesRouter(appCoordator: appCoordinator)
-        let viewModel = EpisodesViewModel(router: router)
+        let viewModel = EpisodesViewModel()
         view.viewModel = viewModel
         return view
     }
