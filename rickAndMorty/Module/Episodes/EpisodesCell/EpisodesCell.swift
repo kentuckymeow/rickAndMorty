@@ -16,7 +16,6 @@ final class EpisodesCell: UICollectionViewCell {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "rick")
         return imageView
     }()
     
@@ -111,10 +110,25 @@ final class EpisodesCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
     
-    func configure(nameCharacter: String, nameEpisode: String, episodeLabel: String) {
+    func configure(nameCharacter: String, nameEpisode: String, episodeLabel: String, episodeImageURL: String) {
         nameCharacterLabel.text = nameCharacter
         episodeInfoLabel.text = "\(nameEpisode) | \(episodeLabel)"
+        
+        if let url = URL(string: episodeImageURL) {
+            URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+                guard let self = self, error == nil, let data = data, let image = UIImage(data: data) else {
+                    print("Failed to load image from URL: \(error?.localizedDescription ?? "Unknown error")")
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.episodeImageView.image = image
+                }
+            }.resume()
+        } else {
+            print("Invalid URL string: \(episodeImageURL)")
+        }
     }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

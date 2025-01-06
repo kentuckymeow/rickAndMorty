@@ -4,28 +4,40 @@
 //
 //  Created by Arseni Khatsuk on 19.12.2024.
 //
+import Foundation
 
 final class EpisodesViewModel {
-    var episodes: [Episodes]
-    
-    init() {
-        self.episodes = [
-            Episodes(name: "First Episode", episodes: "S01E01", characters: [
-                Character(id: 1, name: "Rick Sanchez"),
-            ]),
-            Episodes(name: "Second Episode", episodes: "S01E02", characters: [
-                Character(id: 1, name: "Rick Sanchez")
-            ]),
-            Episodes(name: "Third Episode", episodes: "S01E03", characters: [
-                Character(id: 1, name: "Morty33")
-            ]),
-            Episodes(name: "Fourth Episode", episodes: "S01E04", characters: [
-                Character(id: 1, name: "Rick44")
-            ])
-        ]
+    var episodes: [Episode] = [] {
+        didSet {
+            onEpisodesUpdate?()
+        }
     }
-
-    func getEpisodes() -> [Episodes] {
-        return episodes
+    
+    var errorMessage: String? {
+        didSet {
+            onError?()
+        }
+    }
+    
+    var onEpisodesUpdate: (() -> Void)?
+    var onError: (() -> Void)?
+    
+    func fetchEpisodes() {
+        NetworkService.shared.fetch(endpoint: .episode) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    do {
+                        let decodedResponse = try JSONDecoder().decode(EpisodesResponse.self, from: data)
+                        self?.episodes = decodedResponse.results
+                    } catch {
+                        self?.errorMessage = "Failed to decode data: \(error.localizedDescription)"
+                    }
+                case .failure(let error):
+                    self?.errorMessage = "Request failed: \(error.localizedDescription)"
+                }
+            }
+        }
     }
 }
+

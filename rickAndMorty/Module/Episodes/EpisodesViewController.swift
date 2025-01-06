@@ -16,6 +16,7 @@ final class EpisodesViewController: UIViewController {
         view.backgroundColor = .white
         setupCollectionView()
         setUpUI()
+        viewModel?.fetchEpisodes()
     }
     
     private lazy var imageLogoView: UIImageView = {
@@ -73,8 +74,9 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
         if let episode = viewModel?.episodes[indexPath.item] {
             cell.configure(
                 nameCharacter: episode.characters.first?.name ?? "",
-                nameEpisode: episode.name,
-                episodeLabel: episode.episodes
+                nameEpisode: episode.name ?? "",
+                episodeLabel: episode.episode ?? "",
+                episodeImageURL: episode.characters.first?.image ?? ""
             )
            
         }

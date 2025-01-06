@@ -7,8 +7,17 @@
 
 import Foundation
 
-struct Episodes {
-    var name: String
-    var episodes: String
-    var characters: [Character]
+struct Episode: Codable {
+    let id: Int?
+    let name: String?
+    let air_date: String?
+    let episode: String?
+    let characters: [Character]
+    let url: String?
+    let created: String?
+}
+
+struct EpisodesResponse: Codable {
+    let info: Info
+    let results: [Episode]
 }

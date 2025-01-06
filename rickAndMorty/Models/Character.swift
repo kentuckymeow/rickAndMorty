@@ -7,7 +7,23 @@
 
 import Foundation
 
-struct Character {
-    var id: Int
-    var name: String
+struct Character: Codable {
+    let id: Int?
+    let name: String?
+    let status: CharacterStatus?
+    let species: String?
+    let type: String?
+    let gender: String?
+    let origin: Origin?
+    let location: SingleLocation?
+    let image: String?
+    let episode: [String]?
+    let url: String?
+    let created: String?
 }
+
+struct CharacterResponce: Codable {
+    let info: Info
+    let results: [Character]
+}
+
