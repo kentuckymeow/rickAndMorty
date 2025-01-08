@@ -6,38 +6,36 @@
 //
 import Foundation
 
-final class EpisodesViewModel {
-    var episodes: [Episode] = [] {
-        didSet {
-            onEpisodesUpdate?()
-        }
+protocol EpisodeViewModelDelegate: AnyObject {
+    var updateHandler: (([Episode]) -> Void)? { get set }
+    func getEpisode()
+}
+
+final class EpisodesViewModel: EpisodeViewModelDelegate {
+    var updateHandler: (([Episode]) -> Void)?
+    private var episodeService: IEpisodeService
+    private var episode: [Episode]?
+    
+    init(_ dependencies: IDependencies) {
+        episodeService = dependencies.episodeService
     }
     
-    var errorMessage: String? {
-        didSet {
-            onError?()
-        }
-    }
-    
-    var onEpisodesUpdate: (() -> Void)?
-    var onError: (() -> Void)?
-    
-    func fetchEpisodes() {
-        NetworkService.shared.fetch(endpoint: .episode) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    do {
-                        let decodedResponse = try JSONDecoder().decode(EpisodesResponse.self, from: data)
-                        self?.episodes = decodedResponse.results
-                    } catch {
-                        self?.errorMessage = "Failed to decode data: \(error.localizedDescription)"
-                    }
-                case .failure(let error):
-                    self?.errorMessage = "Request failed: \(error.localizedDescription)"
+    func getEpisode() {
+        episodeService.getEpisode { [weak self] result in
+            switch result {
+            case .success(let episodes):
+                self?.episode = episodes
+                self?.updateHandler?(episodes)
+                
+                if let randomEpisode = episodes.randomElement() {
+                    print("Random episode number: \(randomEpisode.episode)")
                 }
+                
+            case .failure(let error):
+                print("Error fetching episodes: \(error)")
             }
         }
     }
 }
+
 

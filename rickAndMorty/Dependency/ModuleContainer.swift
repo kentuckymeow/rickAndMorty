@@ -42,7 +42,7 @@ extension ModuleContainer {
 extension ModuleContainer {
     func getEpisodesView() -> UIViewController {
         let view = EpisodesViewController()
-        let viewModel = EpisodesViewModel()
+        let viewModel = EpisodesViewModel(dependencies)
         view.viewModel = viewModel
         return view
     }

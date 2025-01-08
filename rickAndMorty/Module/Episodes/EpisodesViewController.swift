@@ -8,7 +8,18 @@
 import UIKit
 
 final class EpisodesViewController: UIViewController {
-    var viewModel: EpisodesViewModel?
+    var viewModel: EpisodeViewModelDelegate? {
+        didSet {
+            viewModel?.updateHandler = { [weak self] episodes in
+                self?.episodes = episodes
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            }
+        }
+    }
+
+    private var episodes: [Episode] = []
     private var collectionView: UICollectionView!
 
     override func viewDidLoad() {
@@ -16,7 +27,7 @@ final class EpisodesViewController: UIViewController {
         view.backgroundColor = .white
         setupCollectionView()
         setUpUI()
-        viewModel?.fetchEpisodes()
+        viewModel?.getEpisode()
     }
     
     private lazy var imageLogoView: UIImageView = {
@@ -64,14 +75,14 @@ final class EpisodesViewController: UIViewController {
 
 extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel?.episodes.count ?? 0
+        return episodes.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EpisodesCell", for: indexPath) as? EpisodesCell else {
             return UICollectionViewCell()
         }
-        if let episode = viewModel?.episodes[indexPath.item] {
+        let episode = episodes[indexPath.item]
             cell.configure(
                 nameCharacter: episode.characters.first?.name ?? "",
                 nameEpisode: episode.name ?? "",
@@ -79,7 +90,7 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
                 episodeImageURL: episode.characters.first?.image ?? ""
             )
            
-        }
+        
         return cell
     }
 
@@ -87,4 +98,3 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
         print("Item selected at index \(indexPath.item)")
     }
 }
-
