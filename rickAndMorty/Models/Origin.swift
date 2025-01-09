@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Origin: Codable {
-    let name: String?
-    let url: String?
+struct Origin: Codable, Hashable {
+    let name: String
+    let url: String
+//    enum CodingKeys: String, CodingKey {
+//        case name
+//        case url
+//    }
 }

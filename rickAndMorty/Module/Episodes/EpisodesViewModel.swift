@@ -21,7 +21,7 @@ final class EpisodesViewModel: EpisodeViewModelDelegate {
     }
     
     func getEpisode() {
-        episodeService.getEpisode { [weak self] result in
+        episodeService.getEpisodes { [weak self] result in
             switch result {
             case .success(let episodes):
                 self?.episode = episodes

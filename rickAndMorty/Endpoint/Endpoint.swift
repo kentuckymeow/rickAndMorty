@@ -31,25 +31,23 @@ enum RickAndMortyEndpoint {
     }
     
     var method: String {
-        return "GET" 
+        return "GET"
     }
     
     var headers: [String: String] {
-            return ["Content-Type": "application/json"]
-        }
-    func makeURLRequest() -> URLRequest? {
-            var components = URLComponents()
-            components.scheme = "https"
-            components.host = baseURL.host
-            components.path = baseURL.path + path
+        return ["Content-Type": "application/json"]
+    }
 
-            guard let url = components.url else { return nil }
-
-            var request = URLRequest(url: url)
-            request.httpMethod = method
-            request.allHTTPHeaderFields = headers
-            return request
-        }
+    func makeURLRequest(queryItems: [URLQueryItem] = []) -> URLRequest? {
+        guard var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false) else { return nil }
+        components.path += path
+        components.queryItems = queryItems.isEmpty ? nil : queryItems
+        guard let url = components.url else { return nil }
+        var request = URLRequest(url: url)
+        request.httpMethod = method
+        request.allHTTPHeaderFields = headers
+        return request
+    }
 }
 
 enum HTTPClientError: Error {
@@ -57,5 +55,3 @@ enum HTTPClientError: Error {
     case invalidResponse(statusCode: Int?, data: Data?)
     case noData
 }
-
-

@@ -11,10 +11,12 @@ protocol IDependencies {
     var moduleContainer: IModuleContainer { get }
     var networkService: IHTTPClient { get }
     var episodeService: IEpisodeService { get }
+    var characterService: ICharacterService { get }
 }
 
 final class Dependencies: IDependencies {
     lazy var moduleContainer: IModuleContainer = ModuleContainer(self)
     lazy var networkService: IHTTPClient = HTTPClient()
     lazy var episodeService: IEpisodeService = EpisodeService(self)
+    lazy var characterService: ICharacterService = CharacterService(self)
 }

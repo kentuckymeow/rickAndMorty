@@ -8,7 +8,7 @@
 import Foundation
 
 enum API {
-    static let baseURL = "https://rickandmortyapi.com/"
+    static let baseURL = "https://rickandmortyapi.com/api/"
 }
 
 enum ImageName {

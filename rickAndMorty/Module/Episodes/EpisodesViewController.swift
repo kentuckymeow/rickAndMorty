@@ -20,6 +20,8 @@ final class EpisodesViewController: UIViewController {
     }
 
     private var episodes: [Episode] = []
+    private var characters: [Character] = []
+
     private var collectionView: UICollectionView!
 
     override func viewDidLoad() {
@@ -83,17 +85,17 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
             return UICollectionViewCell()
         }
         let episode = episodes[indexPath.item]
-            cell.configure(
-                nameCharacter: episode.characters.first?.name ?? "",
-                nameEpisode: episode.name ?? "",
-                episodeLabel: episode.episode ?? "",
-                episodeImageURL: episode.characters.first?.image ?? ""
-            )
-           
-        
+        let firstCharacter = episode.characters.first
+
+        cell.configure(
+            nameCharacter: characters.first?.name ?? "Unknown",
+            nameEpisode: episode.name,
+            episodeLabel: episode.episode,
+            episodeImageURL: characters.first?.image ?? ""
+        )
+
         return cell
     }
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Item selected at index \(indexPath.item)")
     }
