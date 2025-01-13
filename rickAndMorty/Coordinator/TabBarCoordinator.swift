@@ -27,6 +27,23 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
         showTabBarViewController()
     }
     
+    func showEpisodesModuleFlow() {
+        let episodesCoordinator = EpisodesCoordinator(navigationController,dependencies: dependencies)
+        episodesCoordinator.finishDelegate = self
+        episodesCoordinator.start()
+        childCoordinators.append(episodesCoordinator)
+    
+    }
+    
+    func showFavoritesModuleFlow() {
+        let favouritesCoordinator =
+        FavouritesCoordinator(navigationController,dependencies: dependencies)
+        favouritesCoordinator.finishDelegate = self
+        favouritesCoordinator.start()
+        childCoordinators.append(favouritesCoordinator)
+        
+    }
+    
     func showTabBarViewController() {
         let tabBarViewController = TabBarAssembly.configure(dependencies)
         let navVC = UINavigationController(rootViewController: tabBarViewController)
@@ -38,4 +55,18 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
             navigationController.showDetailViewController(navVC, sender: self)
         }
     }
+}
+
+extension TabBarCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        childCoordinators = childCoordinators.filter({ $0.type != childCoordinator.type})
+        switch childCoordinator.type {
+        case.episodes:
+            showEpisodesModuleFlow()
+        case.favourites:
+            showFavoritesModuleFlow()
+        case .app,.launch, .tabBar: break
+        }
+    }
+    
 }

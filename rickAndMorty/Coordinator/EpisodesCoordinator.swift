@@ -1,21 +1,21 @@
 //
-//  CharacterCoordinator.swift
+//  EpisodesCoordinator.swift
 //  rickAndMorty
 //
-//  Created by Arseni Khatsuk on 19.12.2024.
+//  Created by Arseni Khatsuk on 13.01.2025.
 //
 
 import UIKit
 
-protocol CharacterCoordinatorProtocol: Coordinator {
+protocol EpisodesCoordinatorProtocol: Coordinator {
     func start()
 }
 
-final class CharacterCoordinator: CharacterCoordinatorProtocol {
+final class EpisodesCoordinator: EpisodesCoordinatorProtocol {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
-    var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType { .character }
+    var childCoordinators: [any Coordinator] = []
+    var type: CoordinatorType { .episodes }
     var dependencies: IDependencies
     
     required init(_ navigationController: UINavigationController, dependencies: IDependencies) {
@@ -24,18 +24,20 @@ final class CharacterCoordinator: CharacterCoordinatorProtocol {
     }
     
     func start() {
-        showCharacterViewController()
+        showEpisodesFlow()
     }
     
-    func showCharacterViewController() {
+    func showEpisodesFlow() {
+        let episodesViewController = EpisodesAssembly.configure(dependencies)
         let characterViewController = CharacterAssembly.configure(dependencies)
-        let navVC = UINavigationController(rootViewController: characterViewController)
-        if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow}).first {
+        let navVC = UINavigationController(rootViewController: episodesViewController)
+        if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
             window.rootViewController = navVC
             UIView.transition(with: window, duration: 1.0, options: [.transitionCrossDissolve], animations: nil, completion: nil)
         } else {
             navVC.modalPresentationStyle = .fullScreen
             navigationController.showDetailViewController(navVC, sender: self)
         }
+        
     }
 }
