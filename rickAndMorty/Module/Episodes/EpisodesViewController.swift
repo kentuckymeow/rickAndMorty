@@ -10,8 +10,9 @@ import UIKit
 final class EpisodesViewController: UIViewController {
     var viewModel: EpisodeViewModelDelegate? {
         didSet {
-            viewModel?.updateHandler = { [weak self] episodes in
+            viewModel?.updateHandler = { [weak self] episodes, characters in
                 self?.episodes = episodes
+                self?.characters = characters
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
                 }
@@ -21,7 +22,6 @@ final class EpisodesViewController: UIViewController {
 
     private var episodes: [Episode] = []
     private var characters: [Character] = []
-
     private var collectionView: UICollectionView!
 
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ final class EpisodesViewController: UIViewController {
         view.backgroundColor = .white
         setupCollectionView()
         setUpUI()
-        viewModel?.getEpisode()
+        viewModel?.getEpisodeAndCharacter()
     }
     
     private lazy var imageLogoView: UIImageView = {
@@ -77,7 +77,7 @@ final class EpisodesViewController: UIViewController {
 
 extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return episodes.count
+        return min(episodes.count,characters.count)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -85,13 +85,13 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
             return UICollectionViewCell()
         }
         let episode = episodes[indexPath.item]
-        let firstCharacter = episode.characters.first
+        let character = characters[indexPath.item]
 
         cell.configure(
-            nameCharacter: characters.first?.name ?? "Unknown",
+            nameCharacter: character.name,
             nameEpisode: episode.name,
             episodeLabel: episode.episode,
-            episodeImageURL: characters.first?.image ?? ""
+            episodeImageURL: character.image
         )
 
         return cell

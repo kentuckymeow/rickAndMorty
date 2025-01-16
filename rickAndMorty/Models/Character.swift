@@ -17,23 +17,9 @@ struct Character: Codable, Hashable {
     let origin: Origin
     let location: SingleLocation
     let image: String
-    let episode: [Episode]
+    let episode: [String]
     let url: String
     let created: String
-//    enum CodingKeys: String, CodingKey{
-//        case id
-//        case name
-//        case status
-//        case species
-//        case type
-//        case gender
-//        case origin
-//        case location
-//        case image
-//        case episode
-//        case url
-//        case created
-//    }
 }
 
 struct CharacterResponce: Codable {

@@ -20,8 +20,6 @@
 		922807C42D0E17F100ACE427 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922807C32D0E17F100ACE427 /* LaunchViewController.swift */; };
 		925EC75D2D11B8A500668F6C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EC75C2D11B8A500668F6C /* Constants.swift */; };
 		925EC75F2D11CDCF00668F6C /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EC75E2D11CDCF00668F6C /* TabBarCoordinator.swift */; };
-		925EC7622D11CF4900668F6C /* TabBarAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EC7612D11CF4900668F6C /* TabBarAssembly.swift */; };
-		925EC7642D11CF5800668F6C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EC7632D11CF5800668F6C /* TabBarViewController.swift */; };
 		925EC7682D12DEA200668F6C /* EpisodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EC7672D12DEA200668F6C /* EpisodesViewController.swift */; };
 		925EC76A2D12DED500668F6C /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EC7692D12DED500668F6C /* FavouritesViewController.swift */; };
 		925EC76C2D12DF7C00668F6C /* EpisodesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EC76B2D12DF7C00668F6C /* EpisodesAssembly.swift */; };
@@ -61,8 +59,6 @@
 		922807C32D0E17F100ACE427 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		925EC75C2D11B8A500668F6C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		925EC75E2D11CDCF00668F6C /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
-		925EC7612D11CF4900668F6C /* TabBarAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarAssembly.swift; sourceTree = "<group>"; };
-		925EC7632D11CF5800668F6C /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		925EC7672D12DEA200668F6C /* EpisodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesViewController.swift; sourceTree = "<group>"; };
 		925EC7692D12DED500668F6C /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
 		925EC76B2D12DF7C00668F6C /* EpisodesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesAssembly.swift; sourceTree = "<group>"; };
@@ -155,15 +151,6 @@
 				92255A382D2C1BE30082FBC4 /* Codable+Extension.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		925EC7602D11CF1E00668F6C /* TabBarView */ = {
-			isa = PBXGroup;
-			children = (
-				925EC7612D11CF4900668F6C /* TabBarAssembly.swift */,
-				925EC7632D11CF5800668F6C /* TabBarViewController.swift */,
-			);
-			path = TabBarView;
 			sourceTree = "<group>";
 		};
 		925EC7652D12DE7000668F6C /* Episodes */ = {
@@ -275,7 +262,6 @@
 			isa = PBXGroup;
 			children = (
 				922807BB2D0E0CA400ACE427 /* Launch */,
-				925EC7602D11CF1E00668F6C /* TabBarView */,
 				925EC7652D12DE7000668F6C /* Episodes */,
 				926601A62D142D010096020E /* Character */,
 				925EC7662D12DE7F00668F6C /* Favourites */,
@@ -372,7 +358,6 @@
 				925EC75F2D11CDCF00668F6C /* TabBarCoordinator.swift in Sources */,
 				926601A02D1423B90096020E /* Episodes.swift in Sources */,
 				92255A312D2C12740082FBC4 /* HTTPClient.swift in Sources */,
-				925EC7622D11CF4900668F6C /* TabBarAssembly.swift in Sources */,
 				9263165E2D2B36EE0019C245 /* Origin.swift in Sources */,
 				929B4EFC2D0A062D003E8569 /* SceneDelegate.swift in Sources */,
 				926316622D2B45190019C245 /* Info.swift in Sources */,
@@ -380,7 +365,6 @@
 				926601AA2D1437F60096020E /* CharacterAssembly.swift in Sources */,
 				92620C182D35A7D500293C73 /* FavouritesCoordinator.swift in Sources */,
 				926316602D2B371A0019C245 /* Location.swift in Sources */,
-				925EC7642D11CF5800668F6C /* TabBarViewController.swift in Sources */,
 				92255A342D2C15C40082FBC4 /* EpisodeService.swift in Sources */,
 				92255A392D2C1BE30082FBC4 /* Codable+Extension.swift in Sources */,
 				925EC76E2D12DFDD00668F6C /* FavouritesAssembly.swift in Sources */,

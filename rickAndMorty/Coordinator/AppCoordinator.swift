@@ -29,17 +29,28 @@ final class AppCoordinator: AppCoordinatorProtocol {
     }
     
     func showLaunchFlow() {
+        print("Starting showLaunchFlow")
         let launchCoordinator = LaunchCoordinator(navigationController, dependencies: dependencies)
         launchCoordinator.finishDelegate = self
         launchCoordinator.start()
         childCoordinators.append(launchCoordinator)
+        print("Finished showLaunchFlow")
     }
-    
+
     func showMainFlow() {
-        let tabBarCoordinator = TabBarCoordinator(navigationController,dependencies: dependencies)
+        print("Starting showMainFlow")
+        let tabBarCoordinator = TabBarCoordinator(navigationController, dependencies: dependencies)
         tabBarCoordinator.finishDelegate = self
+        
+        // Проверяем, сколько childCoordinators было до добавления нового
+        print("Child coordinators count before adding:", childCoordinators.count)
+        
         tabBarCoordinator.start()
+        
+        // Логируем успешное добавление и состояние массива
         childCoordinators.append(tabBarCoordinator)
+        print("Child coordinators count after adding:", childCoordinators.count)
+        print("Finished showMainFlow")
     }
 }
 

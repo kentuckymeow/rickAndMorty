@@ -14,7 +14,7 @@ protocol EpisodesCoordinatorProtocol: Coordinator {
 final class EpisodesCoordinator: EpisodesCoordinatorProtocol {
     weak var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
-    var childCoordinators: [any Coordinator] = []
+    var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .episodes }
     var dependencies: IDependencies
     
@@ -28,16 +28,12 @@ final class EpisodesCoordinator: EpisodesCoordinatorProtocol {
     }
     
     func showEpisodesFlow() {
-        let episodesViewController = EpisodesAssembly.configure(dependencies)
-        let characterViewController = CharacterAssembly.configure(dependencies)
-        let navVC = UINavigationController(rootViewController: episodesViewController)
-        if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
-            window.rootViewController = navVC
-            UIView.transition(with: window, duration: 1.0, options: [.transitionCrossDissolve], animations: nil, completion: nil)
-        } else {
-            navVC.modalPresentationStyle = .fullScreen
-            navigationController.showDetailViewController(navVC, sender: self)
-        }
-        
+        let EpisodesViewController = EpisodesAssembly.configure(dependencies)
+        navigationController.setViewControllers([EpisodesViewController], animated: false)
+    }
+    
+    func showDetails() {
+        let CharacterViewController = CharacterAssembly.configure(dependencies)
+        navigationController.pushViewController(CharacterViewController, animated: true)
     }
 }

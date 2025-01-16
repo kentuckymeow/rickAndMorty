@@ -9,7 +9,6 @@ import UIKit
 
 protocol IModuleContainer {
     func getLaunchView() -> UIViewController
-    func getTabBarView() -> UIViewController
     func getEpisodesView() -> UIViewController
     func getFavouritesView() -> UIViewController
     func getCharacterView() -> UIViewController
@@ -25,17 +24,6 @@ final class ModuleContainer: IModuleContainer {
 extension ModuleContainer {
     func getLaunchView() -> UIViewController {
         return LaunchViewController()
-    }
-}
-
-extension ModuleContainer {
-    func getTabBarView() -> UIViewController {
-        let view = TabBarViewController()
-        let episodesVC = EpisodesAssembly.configure(dependencies)
-        let favouritesVC = FavouritesAssembly.configure(dependencies)
-        view.controllers = [episodesVC,favouritesVC]
-        view.startIndex = 0
-        return view
     }
 }
 

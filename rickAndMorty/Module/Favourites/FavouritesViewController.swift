@@ -1,5 +1,5 @@
 //
-//  FavouritesViewController.swift
+//  FavoritesViewController.swift
 //  rickAndMorty
 //
 //  Created by Arseni Khatsuk on 18.12.2024.
