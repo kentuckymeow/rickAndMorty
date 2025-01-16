@@ -32,27 +32,23 @@ final class TabBarCoordinator: TabBarCoordinatorProtocol {
         episodesCoordinator.finishDelegate = self
         episodesCoordinator.start()
         childCoordinators.append(episodesCoordinator)
-    
-    }
-    
-    func showFavoritesModuleFlow() {
-        let favouritesCoordinator =
-        FavouritesCoordinator(navigationController,dependencies: dependencies)
+        
+        let favouritesCoordinator = FavouritesCoordinator(navigationController, dependencies: dependencies)
         favouritesCoordinator.finishDelegate = self
         favouritesCoordinator.start()
         childCoordinators.append(favouritesCoordinator)
         
-    }
-    
-    func showTabBarViewController() {
-        let tabBarViewController = TabBarAssembly.configure(dependencies)
-        let navVC = UINavigationController(rootViewController: tabBarViewController)
-        if let window = UIApplication.shared.windows.filter({ $0.isKeyWindow }).first {
-            window.rootViewController = navVC
-            UIView.transition(with: window, duration: 1.0, options: [.transitionCrossDissolve], animations: nil, completion: nil)
-        } else {
-            navVC.modalPresentationStyle = .fullScreen
-            navigationController.showDetailViewController(navVC, sender: self)
+//        tabBarController.viewControllers = [
+//            episodesCoordinator.navigationController,
+//            favouritesCoordinator.navigationController
+//        ]
+//        
+//        if let episodesTab = tabBarController.viewControllers?[0] {
+//            episodesTab.tabBarItem = UITabBarItem(title: "Episodes", image: UIImage(named: "episodesIcon"), tag: 0)
+//        }
+//        
+//        if let favouritesTab = tabBarController.viewControllers?[1] {
+//            favouritesTab.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage(named: "favouritesIcon"), tag: 1)
         }
     }
 }
