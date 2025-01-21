@@ -38,7 +38,10 @@ extension ModuleContainer {
 
 extension ModuleContainer {
     func getFavouritesView() -> UIViewController {
-        return FavouritesViewController()
+        let view = FavouritesViewController()
+        let viewModel = FavouritesViewModel()
+        view.viewModel = viewModel
+        return view
     }
 }
 

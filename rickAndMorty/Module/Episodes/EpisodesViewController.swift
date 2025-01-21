@@ -77,7 +77,9 @@ final class EpisodesViewController: UIViewController {
 
 extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return min(episodes.count,characters.count)
+        print("\(min(episodes.count,characters.count))")
+        print("Number of characters: \(characters.count)")
+        return min(episodes.count, characters.count)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -87,12 +89,14 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
         let episode = episodes[indexPath.item]
         let character = characters[indexPath.item]
 
-        cell.configure(
-            nameCharacter: character.name,
-            nameEpisode: episode.name,
-            episodeLabel: episode.episode,
-            episodeImageURL: character.image
-        )
+            cell.configure(
+                with: episode,
+                character: character,
+                nameCharacter: character.name,
+                nameEpisode: episode.name,
+                episodeLabel: episode.episode,
+                episodeImageURL: character.image
+            )
 
         return cell
     }

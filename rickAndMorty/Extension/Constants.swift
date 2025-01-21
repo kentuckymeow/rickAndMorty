@@ -16,5 +16,6 @@ enum ImageName {
     static let launchImageLogo = "launchLogo"
     static let episodesIcon = "episodesIcon"
     static let favouritesIcon = "favouritesIcon"
+    static let activeFavouritesIcon = "favouritesActiveIcon"
     static let monitorIcon = "monitorIcon"
 }
