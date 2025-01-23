@@ -30,7 +30,7 @@ final class EpisodesCell: UICollectionViewCell {
 
     private let monitorImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: ImageName.monitorIcon)
@@ -42,6 +42,7 @@ final class EpisodesCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 18)
         label.textColor = .label
         label.numberOfLines = 1
+        label.lineBreakMode = .byTruncatingTail
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -50,6 +51,7 @@ final class EpisodesCell: UICollectionViewCell {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: ImageName.favouritesIcon), for: .normal)
         button.tintColor = .systemGray
+        button.setContentCompressionResistancePriority(.required, for: .horizontal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -107,6 +109,14 @@ final class EpisodesCell: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             nameCharacterLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1.2)
+        ])
+        
+        NSLayoutConstraint.activate([
+            favouriteButton.centerXAnchor.constraint(equalTo: stackViewEpisodesInfo.trailingAnchor, constant: -20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            monitorImageView.centerXAnchor.constraint(equalTo: stackViewEpisodesInfo.leadingAnchor, constant: 20)
         ])
     }
 

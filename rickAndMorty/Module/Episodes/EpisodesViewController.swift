@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol EpisodesViewControllerDelegate: AnyObject {
+    func didSelectEpisode()
+}
+
 final class EpisodesViewController: UIViewController {
     var viewModel: EpisodeViewModelDelegate? {
         didSet {
@@ -23,6 +27,7 @@ final class EpisodesViewController: UIViewController {
     private var episodes: [Episode] = []
     private var characters: [Character] = []
     private var collectionView: UICollectionView!
+    weak var delegate: EpisodesViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +106,12 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Item selected at index \(indexPath.item)")
+        switch indexPath.section {
+        case 0:
+            break
+        default:
+            delegate?.didSelectEpisode()
+        }
     }
 }
+

@@ -65,7 +65,7 @@ final class FavouritesViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: view.frame.width * 0.9, height: 300)
         layout.minimumInteritemSpacing = 10
-        layout.minimumLineSpacing = 20
+        layout.minimumLineSpacing = 50
         layout.scrollDirection = .vertical
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
