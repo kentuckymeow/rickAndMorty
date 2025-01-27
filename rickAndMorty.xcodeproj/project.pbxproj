@@ -45,6 +45,7 @@
 		929B4F032D0A062F003E8569 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 929B4F022D0A062F003E8569 /* Assets.xcassets */; };
 		929B4F062D0A062F003E8569 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929B4F042D0A062F003E8569 /* LaunchScreen.storyboard */; };
 		92A141E82D3E76A3008EE066 /* FavouritesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A141E72D3E76A3008EE066 /* FavouritesService.swift */; };
+		92A141EA2D454F86008EE066 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A141E92D454F86008EE066 /* CharacterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		929B4F052D0A062F003E8569 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		929B4F072D0A062F003E8569 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92A141E72D3E76A3008EE066 /* FavouritesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesService.swift; sourceTree = "<group>"; };
+		92A141E92D454F86008EE066 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 			children = (
 				926601A92D1437F60096020E /* CharacterAssembly.swift */,
 				926601A72D1437E40096020E /* CharacterViewController.swift */,
+				92A141E92D454F86008EE066 /* CharacterViewModel.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				92255A312D2C12740082FBC4 /* HTTPClient.swift in Sources */,
 				9263165E2D2B36EE0019C245 /* Origin.swift in Sources */,
 				929B4EFC2D0A062D003E8569 /* SceneDelegate.swift in Sources */,
+				92A141EA2D454F86008EE066 /* CharacterViewModel.swift in Sources */,
 				92620C1C2D3C047D00293C73 /* FavouritesViewModel.swift in Sources */,
 				926316622D2B45190019C245 /* Info.swift in Sources */,
 				922807C22D0E152300ACE427 /* ModuleContainer.swift in Sources */,

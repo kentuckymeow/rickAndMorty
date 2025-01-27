@@ -28,11 +28,17 @@ final class FavouritesCoordinator: FavouritesCoordinatorProtocol {
     }
 
     func showFavouritesFlow() {
-        let favouritesViewController = FavouritesAssembly.configure(dependencies)
-        navigationController.setViewControllers([favouritesViewController], animated: false)
+        let favouritesVC = FavouritesAssembly.configure(dependencies)
+        if let viewController = favouritesVC as? FavouritesViewController {
+            viewController.delegate = self
+        }
+        navigationController.setViewControllers([favouritesVC], animated: false)
     }
 
-    private func showDetails() {
+}
+
+extension FavouritesCoordinator: FavouritesViewControllerDelegate {
+    func didSelectEpisode() {
         let characterViewController = CharacterAssembly.configure(dependencies)
         navigationController.pushViewController(characterViewController, animated: true)
     }

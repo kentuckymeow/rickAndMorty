@@ -28,8 +28,12 @@ final class EpisodesCoordinator: EpisodesCoordinatorProtocol {
     }
     
     func showEpisodesFlow() {
-        let EpisodesVC = EpisodesAssembly.configure(dependencies)
-        navigationController.setViewControllers([EpisodesVC], animated: false)
+        let episodesVC = EpisodesAssembly.configure(dependencies)
+        if let viewController = episodesVC as? EpisodesViewController {
+            viewController.delegate = self
+            
+        }
+        navigationController.setViewControllers([episodesVC], animated: false)
     }
     
 }

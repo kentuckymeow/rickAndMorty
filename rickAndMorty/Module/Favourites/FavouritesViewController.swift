@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FavouritesViewControllerDelegate: AnyObject {
+    func didSelectEpisode()
+}
+
 final class FavouritesViewController: UIViewController {
     var viewModel: FavouriteViewModelDelegate? {
         didSet {
@@ -21,6 +25,11 @@ final class FavouritesViewController: UIViewController {
             }
         }
     }
+    
+    private var collectionView: UICollectionView!
+    private var favouriteEpisodes: [Episode] = []
+    private var characters: [Character] = []
+    weak var delegate: FavouritesViewControllerDelegate?
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -30,10 +39,6 @@ final class FavouritesViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    
-    private var collectionView: UICollectionView!
-    private var favouriteEpisodes: [Episode] = []
-    private var characters: [Character] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,5 +107,9 @@ extension FavouritesViewController: UICollectionViewDataSource, UICollectionView
         )
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.didSelectEpisode()
     }
 }

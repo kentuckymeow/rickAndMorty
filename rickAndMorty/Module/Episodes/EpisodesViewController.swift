@@ -12,6 +12,11 @@ protocol EpisodesViewControllerDelegate: AnyObject {
 }
 
 final class EpisodesViewController: UIViewController {
+    private var episodes: [Episode] = []
+    private var characters: [Character] = []
+    private var collectionView: UICollectionView!
+    weak var delegate: EpisodesViewControllerDelegate?
+    
     var viewModel: EpisodeViewModelDelegate? {
         didSet {
             viewModel?.updateHandler = { [weak self] episodes, characters in
@@ -23,11 +28,6 @@ final class EpisodesViewController: UIViewController {
             }
         }
     }
-
-    private var episodes: [Episode] = []
-    private var characters: [Character] = []
-    private var collectionView: UICollectionView!
-    weak var delegate: EpisodesViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,13 +105,10 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
 
         return cell
     }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            break
-        default:
-            delegate?.didSelectEpisode()
-        }
+        delegate?.didSelectEpisode()
     }
 }
+
 
