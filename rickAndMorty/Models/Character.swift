@@ -10,7 +10,7 @@ import Foundation
 struct Character: Codable, Hashable {
     let id: Int
     let name: String
-    let status: CharacterStatus
+    let status: String
     let species: String
     let type: String
     let gender: String

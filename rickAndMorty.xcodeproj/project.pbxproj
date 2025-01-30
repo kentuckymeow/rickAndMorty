@@ -18,6 +18,7 @@
 		922807C02D0E14B600ACE427 /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922807BF2D0E14B600ACE427 /* Dependencies.swift */; };
 		922807C22D0E152300ACE427 /* ModuleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922807C12D0E152300ACE427 /* ModuleContainer.swift */; };
 		922807C42D0E17F100ACE427 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922807C32D0E17F100ACE427 /* LaunchViewController.swift */; };
+		9239FC562D4A97B700A077BB /* CharacterTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9239FC552D4A97B700A077BB /* CharacterTableView.swift */; };
 		925EC75D2D11B8A500668F6C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EC75C2D11B8A500668F6C /* Constants.swift */; };
 		925EC75F2D11CDCF00668F6C /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EC75E2D11CDCF00668F6C /* TabBarCoordinator.swift */; };
 		925EC7682D12DEA200668F6C /* EpisodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EC7672D12DEA200668F6C /* EpisodesViewController.swift */; };
@@ -60,6 +61,7 @@
 		922807BF2D0E14B600ACE427 /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		922807C12D0E152300ACE427 /* ModuleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleContainer.swift; sourceTree = "<group>"; };
 		922807C32D0E17F100ACE427 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		9239FC552D4A97B700A077BB /* CharacterTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterTableView.swift; sourceTree = "<group>"; };
 		925EC75C2D11B8A500668F6C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		925EC75E2D11CDCF00668F6C /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
 		925EC7672D12DEA200668F6C /* EpisodesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				926601A92D1437F60096020E /* CharacterAssembly.swift */,
 				926601A72D1437E40096020E /* CharacterViewController.swift */,
 				92A141E92D454F86008EE066 /* CharacterViewModel.swift */,
+				9239FC552D4A97B700A077BB /* CharacterTableView.swift */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				926316622D2B45190019C245 /* Info.swift in Sources */,
 				922807C22D0E152300ACE427 /* ModuleContainer.swift in Sources */,
 				926601AA2D1437F60096020E /* CharacterAssembly.swift in Sources */,
+				9239FC562D4A97B700A077BB /* CharacterTableView.swift in Sources */,
 				92620C182D35A7D500293C73 /* FavouritesCoordinator.swift in Sources */,
 				926316602D2B371A0019C245 /* Location.swift in Sources */,
 				92255A342D2C15C40082FBC4 /* EpisodeService.swift in Sources */,

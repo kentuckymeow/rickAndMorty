@@ -17,13 +17,11 @@ final class CharacterViewController: UIViewController {
     }
     
     private var character: [Character] = []
+    private let characterImage = UIImageView()
+    private let infoTableView = CharacterTableView()
+    private let nameLabel = UILabel()
     
-    let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    
     
     let characterName: UILabel = {
         let label = UILabel()
@@ -42,62 +40,67 @@ final class CharacterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUI()
+        view.backgroundColor = .systemBackground
+        setupCharacterImage()
+        setupNameCharacter()
+        setupInfoTableView()
         viewModel?.getCharacterInfo()
         
     }
     
-    private func setUpUI() {
-        view.addSubview(imageView)
-        view.addSubview(characterName)
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
+    
+    func setupCharacterImage() {
+        view.addSubview(characterImage)
+        characterImage.translatesAutoresizingMaskIntoConstraints = false
+        characterImage.contentMode = .scaleAspectFit
+        characterImage.clipsToBounds = true
         
-        view.backgroundColor = .systemBackground
-        
-        NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 200),
-            
-            characterName.topAnchor.constraint(equalTo: imageView.bottomAnchor),
-            
-            tableView.topAnchor.constraint(equalTo: characterName.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
-}
-
-extension CharacterViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        characterImage.layer.cornerRadius = 75
+        characterImage.layer.borderColor = UIColor(named: "borderColor")?.cgColor
+        characterImage.layer.borderWidth = 4
+        setupCharacterImageConstraint()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        guard let character = character.first else { return cell }
-        
-        switch indexPath.row {
-        case 0:
-            cell.textLabel?.text = "Gender: \(character.gender)"
-        case 1:
-            cell.textLabel?.text = "Status: \(character.status)"
-        case 2:
-            cell.textLabel?.text = "Species: \(character.species)"
-        case 3:
-            cell.textLabel?.text = "Type: \(character.type)"
-        case 4:
-            cell.textLabel?.text = "Origin: \(character.origin.name)"
-        case 5:
-            cell.textLabel?.text = "Location: \(character.location)"
-            
-        default:
-            break
-        }
-        return cell
+    func setupNameCharacter() {
+        view.addSubview(nameLabel)
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameLabel.font = .systemFont(ofSize: 32)
+        nameLabel.textColor = UIColor(named: "cameraColor")
+        nameLabel.textAlignment = .center
+        nameLabel.sizeToFit()
+        setupNameLabelConstraint()
     }
+    
+    func setupInfoTableView() {
+        view.addSubview(infoTableView)
+        infoTableView.translatesAutoresizingMaskIntoConstraints = false
+        setupTableConstraint()
+    }
+    
+    func setupTableConstraint() {
+        NSLayoutConstraint.activate([
+            infoTableView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 18),
+            infoTableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            infoTableView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            infoTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            
+        ])
+    }
+    
+    func setupCharacterImageConstraint() {
+        NSLayoutConstraint.activate([
+            characterImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            characterImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            characterImage.widthAnchor.constraint(equalToConstant: 147),
+            characterImage.heightAnchor.constraint(equalTo: characterImage.widthAnchor)
+        ])
+    }
+    
+    func setupNameLabelConstraint(){
+        NSLayoutConstraint.activate([
+            nameLabel.centerXAnchor.constraint(equalTo: characterImage.centerXAnchor),
+            nameLabel.topAnchor.constraint(equalTo: characterImage.bottomAnchor, constant: 49)
+        ])
+    }
+    
 }
