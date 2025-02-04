@@ -21,6 +21,8 @@ final class EpisodesViewModel: EpisodeViewModelDelegate {
     private var characterService: ICharacterService
     private var allEpisodes: [Episode] = []
     private var allCharacters: [Character] = []
+    
+    private var filteredEpisodes: [Episode] = []
     private var filteredCharacters: [Character] = []
 
     init(_ dependencies: IDependencies) {
@@ -33,12 +35,14 @@ final class EpisodesViewModel: EpisodeViewModelDelegate {
             switch result {
             case .success(let episodes):
                 self?.allEpisodes = episodes
-                self?.characterService.getCharacters { [weak self] characterResult in
+                self?.filteredEpisodes = episodes
+                
+                let characterURLs = episodes.flatMap { $0.characters }
+                self?.characterService.getCharacters(from: characterURLs) { [weak self] characterResult in
                     switch characterResult {
                     case .success(let characters):
                         self?.allCharacters = characters
-                        self?.filteredCharacters = characters
-                        self?.updateHandler?(episodes, characters)
+                        self?.filterCharactersForEpisodes()
                     case .failure(let error):
                         print("Error fetching characters: \(error)")
                     }
@@ -48,37 +52,46 @@ final class EpisodesViewModel: EpisodeViewModelDelegate {
             }
         }
     }
+
     
+    private func filterCharactersForEpisodes() {
+        let episodeURLs = filteredEpisodes.flatMap { $0.characters }
+        filteredCharacters = allCharacters.filter { episodeURLs.contains($0.url) }
+        updateHandler?(filteredEpisodes, filteredCharacters)
+    }
+
     func searchEpisodes(query: String) {
         guard !query.isEmpty else {
-            updateHandler?(allEpisodes, filteredCharacters)
+            filteredEpisodes = allEpisodes
+            filterCharactersForEpisodes()
             return
         }
 
-        let filteredEpisodes = allEpisodes.filter { episode in
+        filteredEpisodes = allEpisodes.filter { episode in
             episode.name.lowercased().contains(query.lowercased()) ||
             episode.episode.lowercased().contains(query.lowercased())
         }
-
-        updateHandler?(filteredEpisodes, filteredCharacters)
+        
+        filterCharactersForEpisodes()
     }
     
     func statusSelected(status: String) {
         guard let statusEnum = CharacterStatus(rawValue: status) else { return }
         filteredCharacters = allCharacters.filter { $0.status == statusEnum.rawValue }
-        let filteredEpisodes = allEpisodes.filter { episode in
-            filteredCharacters.contains { $0.episode.contains(episode.url) }
-        }
-        updateHandler?(filteredEpisodes, filteredCharacters)
+        filterEpisodesForCharacters()
     }
 
     func genderSelected(gender: String) {
         guard let genderEnum = CharacterGender(rawValue: gender) else { return }
         filteredCharacters = allCharacters.filter { $0.gender == genderEnum.rawValue }
-        let filteredEpisodes = allEpisodes.filter { episode in
-            filteredCharacters.contains { $0.episode.contains(episode.url) }
+        filterEpisodesForCharacters()
+    }
+
+    private func filterEpisodesForCharacters() {
+        let characterURLs = filteredCharacters.map { $0.url }
+        filteredEpisodes = allEpisodes.filter { episode in
+            episode.characters.contains { characterURLs.contains($0) }
         }
         updateHandler?(filteredEpisodes, filteredCharacters)
     }
-
 }

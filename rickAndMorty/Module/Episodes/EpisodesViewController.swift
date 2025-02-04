@@ -19,7 +19,7 @@ final class EpisodesViewController: UIViewController {
     // MARK: - Properties
     private var episodes: [Episode] = []
     private var characters: [Character] = []
-    private var episodeCharactersCache: [Int: Character] = [:]
+    private var episodeCharactersCache: [Int: [Character]] = [:]
     private var collectionView: UICollectionView!
     private let searchBar = UISearchBar()
     private let filterButton = UIButton(type: .system)
@@ -32,6 +32,7 @@ final class EpisodesViewController: UIViewController {
             viewModel?.updateHandler = { [weak self] episodes, characters in
                 self?.episodes = episodes
                 self?.characters = characters
+                self?.cacheCharactersForEpisodes()
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
                 }
@@ -146,23 +147,30 @@ final class EpisodesViewController: UIViewController {
         filterButton.menu = mainMenu
         filterButton.showsMenuAsPrimaryAction = true
     }
+    
+    private func cacheCharactersForEpisodes() {
+        episodeCharactersCache.removeAll()
+        for episode in episodes {
+            episodeCharactersCache[episode.id] = characters.filter { episode.characters.contains($0.url) }
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return episodes.count
-    }
-    
+            return episodes.count
+        }
+        
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EpisodesCell", for: indexPath) as? EpisodesCell else {
             return UICollectionViewCell()
         }
-        
+            
         let episode = episodes[indexPath.item]
-        let character = episodeCharactersCache[episode.id] ?? characters.randomElement()!
-        episodeCharactersCache[episode.id] = character
-        
+        let episodeCharacters = episodeCharactersCache[episode.id] ?? []
+        let character = episodeCharacters.randomElement() ?? Character.defaultCharacter()
+            
         cell.configure(with: episode, character: character, nameCharacter: character.name, nameEpisode: episode.name, episodeLabel: episode.episode, episodeImageURL: character.image)
         return cell
     }

@@ -14,11 +14,11 @@ protocol IEpisodeService {
 
 struct EpisodeService: IEpisodeService {
     private let networkService: IHTTPClient
-    
+
     init(_ dependencies: IDependencies) {
         networkService = dependencies.networkService
     }
-    
+
     func getEpisodes(completion: @escaping (EpisodeResults) -> Void) {
         networkService.request(target: .episode) { result in
             switch result {

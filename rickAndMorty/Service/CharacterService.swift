@@ -9,7 +9,7 @@ import Foundation
 
 typealias CharacterResults = Result<[Character], Error>
 protocol ICharacterService {
-    func getCharacters(completion: @escaping (CharacterResults) -> Void)
+    func getCharacters(from urls: [String], completion: @escaping (CharacterResults) -> Void)
 }
 
 struct CharacterService: ICharacterService {
@@ -19,14 +19,20 @@ struct CharacterService: ICharacterService {
         networkService = dependencies.networkService
     }
     
-    func getCharacters(completion: @escaping (CharacterResults) -> Void) {
-        networkService.request(target: .character) { result in
+    func getCharacters(from urls: [String], completion: @escaping (CharacterResults) -> Void) {
+        let characterIDs = urls.compactMap { URL(string: $0)?.lastPathComponent }.joined(separator: ",")
+        let endpoint = RickAndMortyEndpoint.customURL("\(API.baseURL)/character/\(characterIDs)")
+
+        networkService.request(target: endpoint) { result in
             switch result {
             case .success(let data):
                 do {
-                    let charactersResponse = try
-                        JSONDecoder().decode(CharacterResponce.self, from: data)
-                    completion(.success(charactersResponse.results))
+                    if characterIDs.contains(",") {                         let characters = try JSONDecoder().decode([Character].self, from: data)
+                        completion(.success(characters))
+                    } else { 
+                        let character = try JSONDecoder().decode(Character.self, from: data)
+                        completion(.success([character]))
+                    }
                 } catch {
                     completion(.failure(error))
                 }

@@ -17,32 +17,16 @@ final class CharacterViewModel: CharacterViewModelDelegate {
     private var characterService: ICharacterService?
     private var characters: [Character] = []
     
-    // Инициализация с сервисом для загрузки данных
     init(_ dependencies: IDependencies) {
         characterService = dependencies.characterService
     }
     
-    // Инициализация с уже известным набором персонажей
     init(characters: [Character]) {
         self.characters = characters
     }
     
     func getCharacterInfo() {
-        // Если данные уже есть, передаем их через updateHandler
-        if !characters.isEmpty {
-            updateHandler?(characters)
-        } else {
-            // Иначе загружаем данные с помощью сервиса
-            characterService?.getCharacters { [weak self] characterResult in
-                switch characterResult {
-                case .success(let character):
-                    self?.characters = character
-                    self?.updateHandler?(character)
-                case .failure(let error):
-                    print("Error fetching characters: \(error)")
-                }
-            }
-        }
+        print("get characterinfo")
     }
 }
 

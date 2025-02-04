@@ -26,4 +26,10 @@ struct CharacterResponce: Codable {
     let info: Info
     let results: [Character]
 }
+extension Character {
+    static func defaultCharacter() -> Character {
+        return Character(id: 0, name: "Unknown", status: "Unknown", species: "Unknown", type: "", gender: "Unknown",origin: Origin(name: "", url: "") ,location: SingleLocation(name: "Unknown", url: ""), image: "", episode: [], url: "", created: "")
+    }
+}
+
 
