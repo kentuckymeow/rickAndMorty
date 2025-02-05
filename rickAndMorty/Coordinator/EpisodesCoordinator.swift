@@ -39,8 +39,10 @@ final class EpisodesCoordinator: EpisodesCoordinatorProtocol {
 }
 
 extension EpisodesCoordinator: EpisodesViewControllerDelegate {
-    func didSelectEpisode() {
-        let CharacterVC = CharacterAssembly.configure(dependencies)
-        navigationController.show(CharacterVC, sender: self)
+    func didSelectEpisode(_ episode: Episode, character: Character) {
+        let characterVC = CharacterAssembly.configure(dependencies, character: character)
+        navigationController.show(characterVC, sender: self)
     }
 }
+
+

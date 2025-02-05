@@ -8,15 +8,15 @@
 import UIKit
 
 final class CharacterViewController: UIViewController {
+    private var character: Character?
     var viewModel: CharacterViewModelDelegate? {
         didSet {
             viewModel?.updateHandler = { [weak self] character in
-                self?.character = character
+                self?.configure(with: character)
             }
         }
     }
     
-    private var character: [Character] = []
     private let characterImage = UIImageView()
     private let infoTableView = CharacterTableView()
     private let nameLabel = UILabel()
@@ -46,6 +46,13 @@ final class CharacterViewController: UIViewController {
         setupInfoTableView()
         viewModel?.getCharacterInfo()
         
+    }
+    
+    func configure(with character: Character) {
+        self.character = character
+        nameLabel.text = character.name
+        characterImage.loadImage(from: character.image) // Загружаем картинку
+        infoTableView.configure(with: character) // Передаем персонажа в таблицу
     }
     
     

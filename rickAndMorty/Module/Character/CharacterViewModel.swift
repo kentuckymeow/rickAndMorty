@@ -8,25 +8,20 @@
 import Foundation
 
 protocol CharacterViewModelDelegate: AnyObject {
-    var updateHandler: (([Character]) -> Void)? { get set }
+    var updateHandler: ((Character) -> Void)? { get set }
     func getCharacterInfo()
 }
 
 final class CharacterViewModel: CharacterViewModelDelegate {
-    var updateHandler: (([Character]) -> Void)?
-    private var characterService: ICharacterService?
-    private var characters: [Character] = []
+    var updateHandler: ((Character) -> Void)?
+    private let character: Character
     
-    init(_ dependencies: IDependencies) {
-        characterService = dependencies.characterService
-    }
-    
-    init(characters: [Character]) {
-        self.characters = characters
+    init(character: Character) {
+        self.character = character
     }
     
     func getCharacterInfo() {
-        print("get characterinfo")
+        updateHandler?(character)
     }
 }
 

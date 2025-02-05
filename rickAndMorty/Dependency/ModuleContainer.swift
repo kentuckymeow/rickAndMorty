@@ -11,7 +11,7 @@ protocol IModuleContainer {
     func getLaunchView() -> UIViewController
     func getEpisodesView() -> UIViewController
     func getFavouritesView() -> UIViewController
-    func getCharacterView() -> UIViewController
+    func getCharacterView(_ character: Character) -> UIViewController
 }
 
 final class ModuleContainer: IModuleContainer {
@@ -46,8 +46,11 @@ extension ModuleContainer {
 }
 
 extension ModuleContainer {
-    func getCharacterView() -> UIViewController {
-        return CharacterViewController()
+    func getCharacterView(_ character: Character) -> UIViewController {
+        let view = CharacterViewController()
+        let viewModel = CharacterViewModel(character: character)
+        view.viewModel = viewModel
+        return view
     }
 }
 

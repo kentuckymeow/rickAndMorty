@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FavouritesViewControllerDelegate: AnyObject {
-    func didSelectEpisode()
+    func didSelectEpisode(_ episode: Episode, character: Character)
 }
 
 final class FavouritesViewController: UIViewController {
@@ -29,6 +29,8 @@ final class FavouritesViewController: UIViewController {
     private var collectionView: UICollectionView!
     private var favouriteEpisodes: [Episode] = []
     private var characters: [Character] = []
+    private var selectedCharactersCache: [Int: Character] = [:]
+    private var episodeCharactersCache: [Int: [Character]] = [:]
     weak var delegate: FavouritesViewControllerDelegate?
 
     private let titleLabel: UILabel = {
@@ -110,6 +112,14 @@ extension FavouritesViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectEpisode()
+        let episode = favouriteEpisodes[indexPath.item]
+
+        // Получаем персонажа из кеша
+        guard let character = selectedCharactersCache[episode.id] else {
+            print("No character found for this episode")
+            return
+        }
+
+        delegate?.didSelectEpisode(episode, character: character)
     }
 }

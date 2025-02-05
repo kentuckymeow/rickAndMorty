@@ -41,6 +41,7 @@
 		926601A82D1437E40096020E /* CharacterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926601A72D1437E40096020E /* CharacterViewController.swift */; };
 		926601AA2D1437F60096020E /* CharacterAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926601A92D1437F60096020E /* CharacterAssembly.swift */; };
 		926601B42D1448410096020E /* EpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926601B32D1448410096020E /* EpisodesViewModel.swift */; };
+		926847042D52438C008A4C40 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926847032D52438C008A4C40 /* UIImageView+Extension.swift */; };
 		929B4EFA2D0A062D003E8569 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929B4EF92D0A062D003E8569 /* AppDelegate.swift */; };
 		929B4EFC2D0A062D003E8569 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929B4EFB2D0A062D003E8569 /* SceneDelegate.swift */; };
 		929B4F032D0A062F003E8569 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 929B4F022D0A062F003E8569 /* Assets.xcassets */; };
@@ -84,6 +85,7 @@
 		926601A72D1437E40096020E /* CharacterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewController.swift; sourceTree = "<group>"; };
 		926601A92D1437F60096020E /* CharacterAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterAssembly.swift; sourceTree = "<group>"; };
 		926601B32D1448410096020E /* EpisodesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodesViewModel.swift; sourceTree = "<group>"; };
+		926847032D52438C008A4C40 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		929B4EF62D0A062D003E8569 /* rickAndMorty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rickAndMorty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		929B4EF92D0A062D003E8569 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		929B4EFB2D0A062D003E8569 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				925EC75C2D11B8A500668F6C /* Constants.swift */,
 				92255A382D2C1BE30082FBC4 /* Codable+Extension.swift */,
+				926847032D52438C008A4C40 /* UIImageView+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				926601A52D142AF20096020E /* Character.swift in Sources */,
 				925EC75D2D11B8A500668F6C /* Constants.swift in Sources */,
 				926601A82D1437E40096020E /* CharacterViewController.swift in Sources */,
+				926847042D52438C008A4C40 /* UIImageView+Extension.swift in Sources */,
 				92A141E82D3E76A3008EE066 /* FavouritesService.swift in Sources */,
 				9263165C2D2B33030019C245 /* CharacterStatus.swift in Sources */,
 				925EC75F2D11CDCF00668F6C /* TabBarCoordinator.swift in Sources */,

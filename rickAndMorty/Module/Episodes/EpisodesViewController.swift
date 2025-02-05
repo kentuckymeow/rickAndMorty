@@ -8,7 +8,7 @@
 import UIKit
 
 protocol EpisodesViewControllerDelegate: AnyObject {
-    func didSelectEpisode()
+    func didSelectEpisode(_ episode: Episode, character: Character)
 }
 
 protocol FilterDelegate: AnyObject {
@@ -20,6 +20,7 @@ final class EpisodesViewController: UIViewController {
     private var episodes: [Episode] = []
     private var characters: [Character] = []
     private var episodeCharactersCache: [Int: [Character]] = [:]
+    private var selectedCharactersCache: [Int: Character] = [:]
     private var collectionView: UICollectionView!
     private let searchBar = UISearchBar()
     private let filterButton = UIButton(type: .system)
@@ -169,15 +170,33 @@ extension EpisodesViewController: UICollectionViewDataSource, UICollectionViewDe
             
         let episode = episodes[indexPath.item]
         let episodeCharacters = episodeCharactersCache[episode.id] ?? []
-        let character = episodeCharacters.randomElement() ?? Character.defaultCharacter()
-            
+
+        // Проверяем, есть ли уже сохраненный персонаж
+        let character: Character
+        if let savedCharacter = selectedCharactersCache[episode.id] {
+            character = savedCharacter
+        } else {
+            character = episodeCharacters.randomElement() ?? Character.defaultCharacter()
+            selectedCharactersCache[episode.id] = character // Сохраняем выбранного персонажа
+        }
+
         cell.configure(with: episode, character: character, nameCharacter: character.name, nameEpisode: episode.name, episodeLabel: episode.episode, episodeImageURL: character.image)
         return cell
     }
+
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.didSelectEpisode()
+        let episode = episodes[indexPath.item]
+
+        // Получаем персонажа из кеша
+        guard let character = selectedCharactersCache[episode.id] else {
+            print("No character found for this episode")
+            return
+        }
+
+        delegate?.didSelectEpisode(episode, character: character)
     }
+
 }
 
 // MARK: - UISearchBarDelegate

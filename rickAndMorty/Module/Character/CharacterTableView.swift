@@ -20,6 +20,11 @@ final class CharacterTableView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func configure(with character: Character) {
+        self.character = character
+        tableView.reloadData()
+    }
 }
 
 //MARK: Table View Data Source

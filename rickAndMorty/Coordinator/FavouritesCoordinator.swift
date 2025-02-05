@@ -38,9 +38,9 @@ final class FavouritesCoordinator: FavouritesCoordinatorProtocol {
 }
 
 extension FavouritesCoordinator: FavouritesViewControllerDelegate {
-    func didSelectEpisode() {
-        let characterViewController = CharacterAssembly.configure(dependencies)
-        navigationController.pushViewController(characterViewController, animated: true)
+    func didSelectEpisode(_ episode: Episode, character: Character) {
+        let characterVC = CharacterAssembly.configure(dependencies, character: character)
+        navigationController.show(characterVC, sender: self)
     }
 }
 
