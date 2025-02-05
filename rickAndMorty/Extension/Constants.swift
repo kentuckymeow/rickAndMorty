@@ -18,4 +18,7 @@ enum ImageName {
     static let favouritesIcon = "favouritesIcon"
     static let activeFavouritesIcon = "favouritesActiveIcon"
     static let monitorIcon = "monitorIcon"
+    static let goBack = "goback"
+    static let charaterTitleImage = "characterTitleImage"
+    static let camera = "camera"
 }

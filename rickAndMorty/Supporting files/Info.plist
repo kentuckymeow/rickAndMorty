@@ -2,9 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Мы используем доступ к фотогалерее для сохранения изображений персонажа.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Мы используем вашу фотогалерею для выбора изображения персонажа.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Мы используем камеру для добавления фото персонажа.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
+		<false/>
+		<key>UIApplicationSupportsTabbedSceneCollection</key>
 		<false/>
 		<key>UISceneConfigurations</key>
 		<dict>
@@ -18,6 +26,8 @@
 				</dict>
 			</array>
 		</dict>
+		<key>UIApplicationPreferredDefaultSceneSessionRole</key>
+		<string>This app has crashed because it attempted to access privacy-sensitive data without a usage description.  The app&apos;s Info.plist must contain an NSCameraUsageDescription key with a string value explaining to the user how the app uses this data.</string>
 	</dict>
 </dict>
 </plist>
